@@ -100,79 +100,29 @@ async function startTaskTimer(task: Task) {
 </script>
 
 <template>
-  <div class="grid gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)]">
-    <section class="panel">
-      <header class="panel-header">
+  <div class="page-shell">
+    <section class="page-hero">
+      <p class="page-kicker">Today</p>
+      <div
+        class="mt-4 grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-end"
+      >
         <div>
-          <p
-            class="text-xs font-semibold uppercase tracking-[0.25em] text-accent"
-          >
-            Today
-          </p>
-          <h2 class="mt-2 text-2xl font-semibold text-white">
+          <h2 class="page-title mt-0">
             Planner for {{ formatUtcDate(new Date().toISOString()) }}
           </h2>
+          <p class="page-copy">
+            Keep the day visible: overdue work first, then what is due, then
+            recurring focus items.
+          </p>
         </div>
-      </header>
 
-      <div class="panel-body space-y-6">
-        <form
-          class="grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]"
-          @submit.prevent="addTodayTask"
-        >
-          <input
-            v-model="quickToday"
-            class="field"
-            placeholder="Quick add for today"
-            type="text"
-          />
-          <button class="button-primary" type="submit">Add for Today</button>
-        </form>
-
-        <div class="grid gap-4">
-          <TaskListSection
-            title="Overdue"
-            :tasks="overdueTasks"
-            @toggle="toggleTask"
-            @delete="deleteTask"
-            @move="moveTask"
-            @edit="openTaskDetails"
-            @start-timer="startTaskTimer"
-          />
-          <TaskListSection
-            title="Due Today"
-            :tasks="dueTodayTasks"
-            @toggle="toggleTask"
-            @delete="deleteTask"
-            @move="moveTask"
-            @edit="openTaskDetails"
-            @start-timer="startTaskTimer"
-          />
-          <TaskListSection
-            title="Daily Focus"
-            :tasks="dailyFocusTasks"
-            @toggle="toggleTask"
-            @delete="deleteTask"
-            @move="moveTask"
-            @edit="openTaskDetails"
-            @start-timer="startTaskTimer"
-          />
-        </div>
-      </div>
-    </section>
-
-    <aside class="space-y-4">
-      <section class="panel">
-        <header class="panel-header">
-          <div>
-            <h2 class="text-lg font-semibold text-white">Active Timer</h2>
-            <p class="mt-1 text-sm text-slate-400">
-              Continue or inspect your current focus session.
-            </p>
-          </div>
-        </header>
-        <div class="panel-body">
-          <p class="text-sm text-slate-400">
+        <div class="stat-card">
+          <p
+            class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500"
+          >
+            Active Timer
+          </p>
+          <p class="mt-3 text-sm font-medium text-zinc-900 dark:text-zinc-50">
             {{ activeTask ? activeTask.title : 'No active task running.' }}
           </p>
           <button
@@ -182,8 +132,51 @@ async function startTaskTimer(task: Task) {
             Open Tracker
           </button>
         </div>
-      </section>
-    </aside>
+      </div>
+
+      <form
+        class="mt-6 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]"
+        @submit.prevent="addTodayTask"
+      >
+        <input
+          v-model="quickToday"
+          class="field"
+          placeholder="Quick add a task for today"
+          type="text"
+        />
+        <button class="button-primary" type="submit">Add for Today</button>
+      </form>
+    </section>
+
+    <section class="grid gap-4">
+      <TaskListSection
+        title="Overdue"
+        :tasks="overdueTasks"
+        @toggle="toggleTask"
+        @delete="deleteTask"
+        @move="moveTask"
+        @edit="openTaskDetails"
+        @start-timer="startTaskTimer"
+      />
+      <TaskListSection
+        title="Due Today"
+        :tasks="dueTodayTasks"
+        @toggle="toggleTask"
+        @delete="deleteTask"
+        @move="moveTask"
+        @edit="openTaskDetails"
+        @start-timer="startTaskTimer"
+      />
+      <TaskListSection
+        title="Daily Focus"
+        :tasks="dailyFocusTasks"
+        @toggle="toggleTask"
+        @delete="deleteTask"
+        @move="moveTask"
+        @edit="openTaskDetails"
+        @start-timer="startTaskTimer"
+      />
+    </section>
   </div>
 
   <TaskDetailsDialog

@@ -59,20 +59,20 @@ function submit() {
 
 <template>
   <Dialog :open="open" class="relative z-50" @close="closeDialog">
-    <div class="fixed inset-0 bg-slate-950/80" />
+    <div class="fixed inset-0 bg-zinc-950/30 backdrop-blur-sm" />
     <div class="fixed inset-0 flex items-center justify-center p-4">
       <DialogPanel class="panel w-full max-w-2xl p-6">
-        <DialogTitle class="text-lg font-semibold text-white">
+        <DialogTitle class="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
           Task Details
         </DialogTitle>
 
         <form class="mt-5 space-y-4" @submit.prevent="submit">
           <label class="space-y-2">
-            <span
-              class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
-            >
-              Title
-            </span>
+              <span
+                class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400"
+              >
+                Title
+              </span>
             <input
               v-model="title"
               class="field"
@@ -84,7 +84,7 @@ function submit() {
           <div class="grid gap-4 md:grid-cols-2">
             <label class="space-y-2">
               <span
-                class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
+                class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400"
               >
                 Due Date
               </span>
@@ -93,7 +93,7 @@ function submit() {
 
             <label class="space-y-2">
               <span
-                class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
+                class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400"
               >
                 Pomodoro Estimate
               </span>
@@ -110,7 +110,7 @@ function submit() {
           <div class="grid gap-4 md:grid-cols-[minmax(0,1fr)_10rem]">
             <label class="space-y-2">
               <span
-                class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
+                class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400"
               >
                 Recurrence
               </span>
@@ -124,7 +124,7 @@ function submit() {
 
             <label class="space-y-2">
               <span
-                class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
+                class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400"
               >
                 Interval
               </span>
@@ -139,11 +139,11 @@ function submit() {
           </div>
 
           <label class="space-y-2">
-            <span
-              class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
-            >
-              Task Note
-            </span>
+              <span
+                class="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400"
+              >
+                Task Note
+              </span>
             <textarea
               v-model="note"
               class="field min-h-40 resize-y"

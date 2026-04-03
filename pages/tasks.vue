@@ -98,20 +98,44 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="panel">
-    <header class="panel-header">
-      <div>
-        <p
-          class="text-xs font-semibold uppercase tracking-[0.25em] text-accent"
+  <div class="page-shell">
+    <section class="page-hero">
+      <p class="page-kicker">Tasks</p>
+      <div
+        class="mt-4 flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between"
+      >
+        <div>
+          <h2 class="page-title mt-0">Daily Focus and The Vault</h2>
+          <p class="page-copy">
+            Capture work fast, split active priorities from backlog, and keep
+            the queue readable.
+          </p>
+        </div>
+
+        <div
+          class="grid gap-3 sm:grid-cols-[minmax(0,1fr)_12rem_auto] xl:min-w-[38rem]"
         >
-          Tasks
-        </p>
-        <h2 class="mt-2 text-2xl font-semibold text-white">
-          Daily Focus and The Vault
-        </h2>
+          <input
+            ref="quickInput"
+            v-model="quickAdd"
+            data-quick-add
+            class="field"
+            type="text"
+            placeholder="Add a task title"
+            aria-label="Quick Add task"
+            @keyup.enter="submitQuickAdd"
+          />
+          <select v-model="quickDaily" class="field" aria-label="Task stream">
+            <option :value="true">Daily Focus</option>
+            <option :value="false">The Vault</option>
+          </select>
+          <button class="button-primary" type="button" @click="submitQuickAdd">
+            Add Task
+          </button>
+        </div>
       </div>
 
-      <div class="flex flex-wrap gap-2">
+      <div class="mt-6 flex flex-wrap gap-3">
         <button
           class="button-secondary"
           @click="taskStore.showClearedCompleted"
@@ -122,55 +146,29 @@ onBeforeUnmount(() => {
           Clear Completed
         </button>
       </div>
-    </header>
+    </section>
 
-    <div class="panel-body space-y-6">
-      <form
-        class="grid gap-3 md:grid-cols-[minmax(0,1fr)_auto_auto]"
-        @submit.prevent="submitQuickAdd"
-      >
-        <input
-          ref="quickInput"
-          v-model="quickAdd"
-          data-quick-add
-          class="field"
-          type="text"
-          placeholder="Quick Add"
-          aria-label="Quick Add task"
-        />
-        <select
-          v-model="quickDaily"
-          class="field md:max-w-[12rem]"
-          aria-label="Task stream"
-        >
-          <option :value="true">Daily Focus</option>
-          <option :value="false">The Vault</option>
-        </select>
-        <button class="button-primary" type="submit">Add Task</button>
-      </form>
-
-      <div class="grid gap-4 xl:grid-cols-2">
-        <TaskListSection
-          title="Daily Focus"
-          :tasks="taskStore.dailyTasks"
-          @toggle="toggleTask"
-          @delete="deleteTask"
-          @move="moveTask"
-          @edit="openTaskDetails"
-          @start-timer="startTaskTimer"
-        />
-        <TaskListSection
-          title="The Vault"
-          :tasks="taskStore.vaultTasks"
-          @toggle="toggleTask"
-          @delete="deleteTask"
-          @move="moveTask"
-          @edit="openTaskDetails"
-          @start-timer="startTaskTimer"
-        />
-      </div>
-    </div>
-  </section>
+    <section class="grid gap-4 xl:grid-cols-2">
+      <TaskListSection
+        title="Daily Focus"
+        :tasks="taskStore.dailyTasks"
+        @toggle="toggleTask"
+        @delete="deleteTask"
+        @move="moveTask"
+        @edit="openTaskDetails"
+        @start-timer="startTaskTimer"
+      />
+      <TaskListSection
+        title="The Vault"
+        :tasks="taskStore.vaultTasks"
+        @toggle="toggleTask"
+        @delete="deleteTask"
+        @move="moveTask"
+        @edit="openTaskDetails"
+        @start-timer="startTaskTimer"
+      />
+    </section>
+  </div>
 
   <TaskDetailsDialog
     :open="taskDetailsOpen"

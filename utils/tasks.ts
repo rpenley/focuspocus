@@ -132,25 +132,29 @@ export function getTaskDueMeta(dueDate: string | null, now = new Date()) {
       return {
         state,
         label: 'Overdue',
-        className: 'border-rose-400/30 bg-rose-400/10 text-rose-200',
+        className:
+          'border-rose-200 bg-rose-50 text-rose-700 dark:border-rose-400/40 dark:bg-rose-500/10 dark:text-rose-200',
       }
     case 'today':
       return {
         state,
         label: 'Due Today',
-        className: 'border-amber-400/30 bg-amber-400/10 text-amber-100',
+        className:
+          'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-400/40 dark:bg-amber-500/10 dark:text-amber-200',
       }
     case 'upcoming':
       return {
         state,
         label: 'Upcoming',
-        className: 'border-sky-400/30 bg-sky-400/10 text-sky-100',
+        className:
+          'border-sky-200 bg-sky-50 text-sky-700 dark:border-sky-400/40 dark:bg-sky-500/10 dark:text-sky-200',
       }
     default:
       return {
         state,
         label: 'No Date',
-        className: 'border-white/10 bg-white/5 text-slate-300',
+        className:
+          'border-zinc-200 bg-zinc-50 text-zinc-600 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-300',
       }
   }
 }

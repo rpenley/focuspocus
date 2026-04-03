@@ -33,6 +33,8 @@ export interface Note {
   updatedAt: string
 }
 
+export type ThemePreference = 'system' | 'light' | 'dark'
+
 export type RecurrenceType = 'none' | 'daily' | 'weekly' | 'monthly'
 
 export type TaskDueState = 'overdue' | 'today' | 'upcoming' | 'none'

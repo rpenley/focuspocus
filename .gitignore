@@ -27,3 +27,6 @@ logs
 server/database/*.sqlite
 server/database/*.sqlite-shm
 server/database/*.sqlite-wal
+
+# Agents
+agentdocs/
